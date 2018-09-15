@@ -1,0 +1,67 @@
+{
+  /* source and target connection strings. samples below.  NOTE: be sure to include ;requireNewInstance=True!  if not, the connection will be reused */
+  "connString_source": "Url=https://instance.crm.dynamics.com; Username=admin@instance.onmicrosoft.com; Password=pass@word; AuthType=Office365;requireNewInstance=True",
+  "connString_target": "Url=https://instance.crm.dynamics.com; Username=admin@instance.onmicrosoft.com; Password=pass@word; AuthType=Office365;requireNewInstance=True",
+
+  /* folder to which the source templates will be downloaded. Full path or relative to exe 
+     if the {date format} slug is present, the date/time will be replaced for uniqueness.  Example: DocTemplateDownload_2018-09-08
+
+     If this is import only, then this can be left null 
+
+     NOTE: existing document templates in this folder will be overwritten by the new exports!
+  */
+  "exportFolder": "DocTemplateDownload_{0:yyyyMMddhh}",
+
+  /* folder from which the target templates will be uploaded. Full path or relative to exe 
+    For straight sync, this should be the same as export folder and can be left null
+
+    The file will be validated before importing: 
+      only word and excel docs can be uploaded
+      entity type code must be present, if not file will be ignored
+      entity type codes will be updated to match target environment before import 
+  */
+  //"importFolder": "DocTemplateDownload_{0:yyyyMMddhh}",
+
+  /* Only export the source documents to the exportFolder location.  Useful for backing up to source code control */
+  "exportSourceOnly": false,
+
+  /* Only import the documents from the importFolder into the target system. Useful for a quick import. */
+  "importTargetOnly": false,
+
+  /* include only Active templates*/
+  "activeOnly": true,
+
+  /* if true, we will only create new documents in the target, not overwrite existing */
+  "createOnly": false,
+
+  /* Document Types to Include: Both, Word, Excel */
+  "docTypes": "Both",
+
+  /* list of filters on source files.  Files matching these filters will not be transferred */
+  /* filter by names using Like matching.  For example, ["Summary"] */
+  "fileNameFilters": [],
+
+  /* match on the entity logical name .  For example, ["incident", "account"] */
+  "entityTypeFilters": [],
+
+  /* flag indicating whether to acutally perform the export and import.  helpful when testing your settings */
+  "loggingOnly": false
+} 
+
+/*
+    connection string examples (thanks for the examples, Jason Lattimer and the D365 Developer Extensions:
+    Online using Office 365
+    Url=https://contoso.crm.dynamics.com; Username=crmadmin@contoso.onmicrosoft.com; Password=password; AuthType=Office365;
+
+    On-premises with provided user credentials
+    Url=http://myserver/contoso; Domain=mydomain; Username=administrator; Password=password; AuthType=AD;
+
+    On-premises using Windows integrated security
+    Url=http://myserver/contoso; authtype=AD;
+
+    On-Premises (IFD) with claims
+    Url=https://hostname.contoso.com/orgname; Domain=mydomain; Username=mydomain\administrator; Password=password; AuthType=IFD;
+
+    OAuth
+    Url=https://contoso.crm.dynamics.com; Username=crmadmin@contoso.onmicrosoft.com; Password=password; AppId=<GUID>; RedirectUri=app://<GUID>; AuthType=OAuth;
+  */
